@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorDeepAqua">#003b46</color>
+    <color name="colorOcean">#07575b</color>
+    <color name="colorWave">#66A5AD</color>
+    <color name="colorSeaFoam">#c4dfe6</color>
+</resources>
