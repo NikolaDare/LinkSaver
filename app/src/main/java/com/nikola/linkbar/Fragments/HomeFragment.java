@@ -13,6 +13,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 
 import com.nikola.linkbar.Models.LinkViewModel;
 import com.nikola.linkbar.data.adapters.LinkAdapter;
@@ -53,13 +55,33 @@ public class HomeFragment extends Fragment{
         });
 
         mAdapter.setOnItemClicked(new LinkAdapter.OnItemClickListener() {
+            private ImageView btnStar;
+
             @Override
-            public void onItemClick(int position) {
+            public void onItemClick(View v,int position) {
                 Log.d(TAG, "onItemClick: "+mAdapter.getLink(position));
                 linkViewModel.delete(mAdapter.getLink(position));
                 mAdapter.remove(position);
             }
+
+            @Override
+            public void onStarClick(View v,int pos) {
+                boolean temp = mAdapter.getLink(pos).isFavorite();
+
+                btnStar = (ImageView) v.findViewById(R.id.fav);
+
+                if (mAdapter.getLink(pos).isFavorite()){
+                    btnStar.setImageResource(android.R.drawable.star_on);
+                }else {
+                    btnStar.setImageResource(android.R.drawable.star_off);
+                }
+
+                mAdapter.getLink(pos).setFavorite(!temp);
+                Log.d(TAG, "onItemClick: "+!temp);
+                linkViewModel.update(mAdapter.getLink(pos));
+            }
         });
+
 
         setData();
         return view;

@@ -23,11 +23,14 @@ public class linkRepository {
 
     private LinkDao linkDao;
     private LiveData<List<Links>> allLinks;
+    private LiveData<List<Links>> allFav;
 
     public linkRepository(Application application){
         LinkDatabase database = LinkDatabase.getInstance(application);
         linkDao = database.linkDao();
         allLinks = linkDao.getAllLinks();
+        allFav = linkDao.getAllFav();
+
     }
 
 //    public void insert(final Links link){
@@ -39,7 +42,7 @@ public class linkRepository {
 //        }).publish();
 //    }
     public  void insert(Links link){ new InsertLinkAsyncTask(linkDao).execute(link);}
-//    public void update(Links link){ new UpdateLinkAsyncTask(linkDao).execute(link);}
+    public void update(Links link){ new UpdateLinkAsyncTask(linkDao).execute(link);}
 
     public void delete(Links link){ new DeleteLinkAsyncTask(linkDao).execute(link);}
 
@@ -47,6 +50,10 @@ public class linkRepository {
 
     public LiveData<List<Links>> getAllLinks(){
         return allLinks;
+    }
+
+    public LiveData<List<Links>> getAllFav(){
+        return allFav;
     }
 
     //********************************ASYNC TASKS*****************************************//
@@ -66,6 +73,16 @@ public class linkRepository {
         }
     }
 
+    private static class UpdateLinkAsyncTask extends  AsyncTask<Links,Void,Void>{
+        private LinkDao linkDao;
+
+        private UpdateLinkAsyncTask(LinkDao linkDao){this.linkDao=linkDao;}
+        @Override
+        protected Void doInBackground(Links... links) {
+            linkDao.update(links[0]);
+            return null;
+        }
+    }
 
     private static class DeleteLinkAsyncTask extends AsyncTask<Links,Void,Void>{
 
@@ -96,4 +113,5 @@ public class linkRepository {
             return null;
         }
     }
+
 }

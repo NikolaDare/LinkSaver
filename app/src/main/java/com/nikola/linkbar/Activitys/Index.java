@@ -87,7 +87,7 @@ public class Index extends AppCompatActivity {
                 String name,url;
                 name = String.valueOf(tName.getText());
                 url = String.valueOf(tUrl.getText());
-                Links link = new Links(name,url);
+                Links link = new Links(name,url,false);
                 linkViewModel.insert(link);
                 dialog.dismiss();
             }

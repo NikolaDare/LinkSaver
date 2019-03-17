@@ -28,5 +28,10 @@ public interface LinkDao {
     @Query("Select * from list")
     LiveData<List<Links>> getAllLinks();
 
+    @Query("Select * from list where favorite=1")
+    LiveData<List<Links>> getAllFav();
+
+
+
 
 }

@@ -48,9 +48,9 @@ public abstract class LinkDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            noteDao.insert(new Links("Title 1", "Description 1"));
-            noteDao.insert(new Links("Title 2", "Description 2"));
-            noteDao.insert(new Links("Title 3", "Description 3"));
+            noteDao.insert(new Links("Title 1", "Description 1",false));
+            noteDao.insert(new Links("Title 2", "Description 2",false));
+            noteDao.insert(new Links("Title 3", "Description 3",false));
 
             return null;
         }

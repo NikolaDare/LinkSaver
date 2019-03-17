@@ -24,7 +24,8 @@ public class LinkAdapter extends RecyclerView.Adapter<LinkAdapter.mViewHolder> {
     private OnItemClickListener mListener;
 
     public interface OnItemClickListener{
-        void onItemClick(int position);
+        void onItemClick(View v,int position);
+        void onStarClick(View v,int pos);
     }
 
     public void setOnItemClicked(OnItemClickListener listener){
@@ -54,7 +55,19 @@ public class LinkAdapter extends RecyclerView.Adapter<LinkAdapter.mViewHolder> {
                         int position = getLayoutPosition();
 
                         if (position!=RecyclerView.NO_POSITION){
-                            listener.onItemClick(position);
+                            listener.onItemClick(v,position);
+                        }
+                    }
+                }
+            });
+            mStar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener!=null){
+                        int position = getLayoutPosition();
+
+                        if (position!=RecyclerView.NO_POSITION){
+                            listener.onStarClick(v,position);
                         }
                     }
                 }
@@ -78,21 +91,9 @@ public class LinkAdapter extends RecyclerView.Adapter<LinkAdapter.mViewHolder> {
         holder.mClicked=true;
         holder.mTitle.setText(ln.getTitle());
         holder.mDesc.setText(ln.getDesc());
-        holder.mStar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Log.d(TAG, "onClick: "+ln.getId());
-                if (holder.mClicked){
-                    holder.mClicked=false;
-                    holder.mStar.setImageResource(android.R.drawable.star_on);
-                }else {
-                    holder.mClicked=true;
-                    holder.mStar.setImageResource(android.R.drawable.star_off);
-                }
-
-            }
-        });
+        if (ln.isFavorite()){
+            holder.mStar.setImageResource(android.R.drawable.star_on);
+        }
     }
 
     public void setLinks(List<Links> LinksList){

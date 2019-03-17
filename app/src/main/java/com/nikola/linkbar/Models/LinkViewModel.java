@@ -16,14 +16,17 @@ public class LinkViewModel extends AndroidViewModel {
     private static final String TAG = "Model";
     private linkRepository rep;
     private LiveData<List<Links>> allNotes;
+    private LiveData<List<Links>> allFav;
 
     public LinkViewModel(Application application) {
         super(application);
 //        Log.d(TAG, "LinkViewModel: "+rep.getAllLinks());
         rep = new linkRepository(application);
         allNotes = rep.getAllLinks();
+        allFav=rep.getAllFav();
     }
 
+    public LiveData<List<Links>> getAllFav(){return allFav;}
     public LiveData<List<Links>> getAllLinks(){
         return allNotes;
     }
@@ -33,7 +36,7 @@ public class LinkViewModel extends AndroidViewModel {
     }
 
     public void update(Links link){
-//        rep.update(link);
+       rep.update(link);
     }
 
     public void delete(Links link){

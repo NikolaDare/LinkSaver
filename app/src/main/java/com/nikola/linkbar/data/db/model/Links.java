@@ -4,9 +4,11 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
 @Entity(tableName = "list")
 public class Links {
+
     @ColumnInfo(name = "Id")
     @PrimaryKey(autoGenerate = true)
     private int mId;
@@ -16,10 +18,11 @@ public class Links {
     @ColumnInfo(name = "Desc")
     private String mDesc;
 
-    public Links(String mTitle, String mDesc) {
+    private boolean favorite;
+    public Links(String mTitle, String mDesc,boolean favorite) {
         this.mTitle = mTitle;
         this.mDesc = mDesc;
-
+        this.favorite= favorite;
     }
 
     @Ignore
@@ -30,6 +33,13 @@ public class Links {
         this.mId=mId;
     }
 
+    public boolean isFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
+    }
 
     public int getId() {
         return mId;
@@ -58,6 +68,7 @@ public class Links {
                 "Title=" + mTitle + "\n" +
                 ", Desc=" + mDesc + "\n" +
                 ", Id=" + mId + "\n" +
+                ", Favorite=" + favorite + "\n" +
                 '}';
     }
 }
