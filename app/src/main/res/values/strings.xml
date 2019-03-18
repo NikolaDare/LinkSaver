@@ -11,4 +11,5 @@
     <string name="tab_text_3">Tab 3</string>
     <string name="Link_name">Link name</string>
     <string name="Link">URL</string>
+    <string name="Delete">Are you sure you wan\'t to delete all links?</string>
 </resources>

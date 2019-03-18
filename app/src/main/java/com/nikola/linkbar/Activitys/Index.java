@@ -103,16 +103,33 @@ public class Index extends AppCompatActivity {
         dialog.show();
     }
 
-    public void DeleteAll(View v){
-        ImageView dlt;
-        dlt = (ImageView) v.findViewById(R.id.deleteAll);
-        dlt.setOnClickListener(new View.OnClickListener() {
+    public void ShowDelete(View v){
+        TextView btn;
+        Button yes;
+        Button no;
+
+        dialog.setContentView(R.layout.delete_dialog);
+
+        yes = (Button) dialog.findViewById(R.id.yes);
+        no = (Button) dialog.findViewById(R.id.no);
+        yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 linkViewModel.deleteAll();
+                dialog.dismiss();
             }
         });
+        no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
     }
+
+
     //creats SectionsPageAdapter and add fragments to SPA
     private void SetupViewPage(ViewPager VP){
         SectionPageAdapter adapter = new SectionPageAdapter(getSupportFragmentManager());

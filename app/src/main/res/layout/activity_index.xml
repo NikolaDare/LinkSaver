@@ -38,9 +38,9 @@
                     android:id="@+id/deleteAll"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:onClick="DeleteAll"
                     android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:onClick="ShowDelete"
                     app:srcCompat="@android:drawable/ic_menu_delete" />
 
                 <ImageView
