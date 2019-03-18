@@ -69,6 +69,7 @@ public class Index extends AppCompatActivity {
         tab.setupWithViewPager(mViewPager);
 
     }
+
     public void ShowPopup(View v){
         ImageView btn;
         Button insert;
@@ -102,6 +103,16 @@ public class Index extends AppCompatActivity {
         dialog.show();
     }
 
+    public void DeleteAll(View v){
+        ImageView dlt;
+        dlt = (ImageView) v.findViewById(R.id.deleteAll);
+        dlt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                linkViewModel.deleteAll();
+            }
+        });
+    }
     //creats SectionsPageAdapter and add fragments to SPA
     private void SetupViewPage(ViewPager VP){
         SectionPageAdapter adapter = new SectionPageAdapter(getSupportFragmentManager());

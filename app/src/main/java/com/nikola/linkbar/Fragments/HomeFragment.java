@@ -49,7 +49,7 @@ public class HomeFragment extends Fragment{
         linkViewModel.getAllLinks().observe(getActivity(), new Observer<List<Links>>() {
             @Override
             public void onChanged(@Nullable List<Links> links) {
-                Log.d(TAG, "onChanged: "+links);
+
                 mAdapter.setLinks(links);
             }
         });
@@ -59,7 +59,7 @@ public class HomeFragment extends Fragment{
 
             @Override
             public void onItemClick(View v,int position) {
-                Log.d(TAG, "onItemClick: "+mAdapter.getLink(position));
+
                 linkViewModel.delete(mAdapter.getLink(position));
                 mAdapter.remove(position);
             }
@@ -77,7 +77,6 @@ public class HomeFragment extends Fragment{
                 }
 
                 mAdapter.getLink(pos).setFavorite(!temp);
-                Log.d(TAG, "onItemClick: "+!temp);
                 linkViewModel.update(mAdapter.getLink(pos));
             }
         });

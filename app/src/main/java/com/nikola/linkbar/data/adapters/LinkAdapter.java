@@ -93,6 +93,8 @@ public class LinkAdapter extends RecyclerView.Adapter<LinkAdapter.mViewHolder> {
         holder.mDesc.setText(ln.getDesc());
         if (ln.isFavorite()){
             holder.mStar.setImageResource(android.R.drawable.star_on);
+        }else{
+            holder.mStar.setImageResource(android.R.drawable.star_off);
         }
     }
 

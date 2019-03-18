@@ -53,7 +53,7 @@ public class FavoriteFragment extends Fragment {
         linkViewModel.getAllFav().observe(getActivity(), new Observer<List<Links>>() {
             @Override
             public void onChanged(@Nullable List<Links> links) {
-                Log.d(TAG, "onChanged: "+links);
+
                 mAdapter.setLinks(links);
             }
         });
@@ -63,7 +63,8 @@ public class FavoriteFragment extends Fragment {
             @Override
             public void onItemClick(View v,int position) {
 
-
+                linkViewModel.delete(mAdapter.getLink(position));
+                mAdapter.remove(position);
             }
 
             @Override
@@ -77,18 +78,11 @@ public class FavoriteFragment extends Fragment {
                     btnStar.setImageResource(android.R.drawable.star_off);
                 }
                 mAdapter.getLink(pos).setFavorite(!temp);
-                Log.d(TAG, "onItemClick: "+temp);
+
                 linkViewModel.update(mAdapter.getLink(pos));
             }
         });
 
-//        btn.setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Log.d(TAG, "onClick: CLicked"+TAG);
-//                Toast.makeText(getActivity(),"This is "+TAG,Toast.LENGTH_SHORT).show();
-//            }
-//        });
         setData();
         return view;
 
