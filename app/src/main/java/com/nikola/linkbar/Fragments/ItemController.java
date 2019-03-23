@@ -68,7 +68,11 @@ public class ItemController  {
                 for (int t = 0; t < adapter.getLinks().size(); t++) {
                     if (adapter.getLink(t).getId() != adapter.getLink(position).getId() && adapter.getLink(t).getViewed() > 0) {
                         int i = adapter.getLink(t).getViewed();
-                        --i;
+                        if (adapter.getLinks().size()<10&&i==1){
+
+                        }else {
+                            --i;
+                        }
                         adapter.getLink(t).setViewed(i);
                         linkViewModel.update(adapter.getLink(t));
                     }
