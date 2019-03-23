@@ -14,13 +14,5 @@ public class SearchGoogle {
         this.desc = desc;
     }
 
-    public void Search(){
-        try {
-            query = URLEncoder.encode(desc,"utf-8");
-            Inrent
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
 }

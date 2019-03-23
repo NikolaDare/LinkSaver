@@ -26,6 +26,7 @@ public class LinkAdapter extends RecyclerView.Adapter<LinkAdapter.mViewHolder> {
     public interface OnItemClickListener{
         void onItemClick(View v,int position);
         void onStarClick(View v,int pos);
+        void onRowClick(View v,int position);
     }
 
     public void setOnItemClicked(OnItemClickListener listener){
@@ -72,6 +73,18 @@ public class LinkAdapter extends RecyclerView.Adapter<LinkAdapter.mViewHolder> {
                     }
                 }
             });
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener!=null){
+                        int position = getLayoutPosition();
+
+                        if (position!=RecyclerView.NO_POSITION){
+                            listener.onRowClick(v,position);
+                        }
+                    }
+                }
+            });
         }
 
 
@@ -102,6 +115,10 @@ public class LinkAdapter extends RecyclerView.Adapter<LinkAdapter.mViewHolder> {
 
         this.LinkList = LinksList;
         notifyDataSetChanged();
+    }
+
+    public List<Links> getLinks(){
+        return LinkList;
     }
 
     public Links getLink(int pos){

@@ -34,6 +34,7 @@ public class FavoriteFragment extends Fragment {
     private RecyclerView recyclerView;
     private LinkAdapter mAdapter;
     private LinkViewModel linkViewModel;
+    private ItemController controller;
 
     @Nullable
     @Override
@@ -57,31 +58,9 @@ public class FavoriteFragment extends Fragment {
                 mAdapter.setLinks(links);
             }
         });
-        mAdapter.setOnItemClicked(new LinkAdapter.OnItemClickListener() {
-            private ImageView btnStar;
+        controller = new ItemController(linkViewModel,mAdapter,getActivity());
 
-            @Override
-            public void onItemClick(View v,int position) {
-
-                linkViewModel.delete(mAdapter.getLink(position));
-                mAdapter.remove(position);
-            }
-
-            @Override
-            public void onStarClick(View v,int pos) {
-
-                btnStar = (ImageView) v.findViewById(R.id.fav);
-                boolean temp = mAdapter.getLink(pos).isFavorite();
-                if (!mAdapter.getLink(pos).isFavorite()){
-                    btnStar.setImageResource(android.R.drawable.star_on);
-                }else {
-                    btnStar.setImageResource(android.R.drawable.star_off);
-                }
-                mAdapter.getLink(pos).setFavorite(!temp);
-
-                linkViewModel.update(mAdapter.getLink(pos));
-            }
-        });
+        controller.OnClick();
 
         setData();
         return view;

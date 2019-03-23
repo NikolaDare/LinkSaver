@@ -24,13 +24,14 @@ public class linkRepository {
     private LinkDao linkDao;
     private LiveData<List<Links>> allLinks;
     private LiveData<List<Links>> allFav;
+    private LiveData<List<Links>> allViewed;
 
     public linkRepository(Application application){
         LinkDatabase database = LinkDatabase.getInstance(application);
         linkDao = database.linkDao();
         allLinks = linkDao.getAllLinks();
         allFav = linkDao.getAllFav();
-
+        allViewed = linkDao.getAllViewed();
     }
 
 //    public void insert(final Links link){
@@ -56,6 +57,9 @@ public class linkRepository {
         return allFav;
     }
 
+    public LiveData<List<Links>> getViewed(){
+        return allViewed;
+    }
     //********************************ASYNC TASKS*****************************************//
 
     private static class InsertLinkAsyncTask extends AsyncTask<Links,Void,Void>{

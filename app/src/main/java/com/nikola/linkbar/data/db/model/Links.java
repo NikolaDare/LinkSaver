@@ -18,15 +18,14 @@ public class Links {
     @ColumnInfo(name = "Desc")
     private String mDesc;
 
+    private int viewed;
+
     private boolean favorite;
-    public Links(String mTitle, String mDesc,boolean favorite) {
+    public Links(String mTitle, String mDesc,boolean favorite,int viewed) {
         this.mTitle = mTitle;
         this.mDesc = mDesc;
         this.favorite= favorite;
-    }
-
-    @Ignore
-    public Links() {
+        this.viewed = viewed;
     }
 
     public void setId(int mId) {
@@ -61,6 +60,14 @@ public class Links {
         this.mDesc = mDesc;
     }
 
+    public int getViewed() {
+        return viewed;
+    }
+
+    public void setViewed(int viewed) {
+        this.viewed = viewed;
+    }
+
     @Ignore
     @Override
     public String toString() {
@@ -69,6 +76,7 @@ public class Links {
                 ", Desc=" + mDesc + "\n" +
                 ", Id=" + mId + "\n" +
                 ", Favorite=" + favorite + "\n" +
+                ", Viewed=" + viewed + "\n" +
                 '}';
     }
 }

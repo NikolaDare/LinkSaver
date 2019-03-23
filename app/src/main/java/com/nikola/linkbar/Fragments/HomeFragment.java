@@ -2,6 +2,8 @@ package com.nikola.linkbar.Fragments;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -21,6 +23,8 @@ import com.nikola.linkbar.data.adapters.LinkAdapter;
 import com.nikola.linkbar.data.db.model.Links;
 import com.nikola.linkbar.R;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 
 public class HomeFragment extends Fragment{
@@ -31,6 +35,7 @@ public class HomeFragment extends Fragment{
     private LinkAdapter mAdapter;
     private View view;
     private LinkViewModel linkViewModel;
+    private ItemController controller;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -54,34 +59,9 @@ public class HomeFragment extends Fragment{
             }
         });
 
-        mAdapter.setOnItemClicked(new LinkAdapter.OnItemClickListener() {
-            private ImageView btnStar;
+        controller = new ItemController(linkViewModel,mAdapter,getActivity());
 
-            @Override
-            public void onItemClick(View v,int position) {
-
-                linkViewModel.delete(mAdapter.getLink(position));
-                mAdapter.remove(position);
-            }
-
-            @Override
-            public void onStarClick(View v,int pos) {
-                boolean temp = mAdapter.getLink(pos).isFavorite();
-
-                btnStar = (ImageView) v.findViewById(R.id.fav);
-
-                if (mAdapter.getLink(pos).isFavorite()){
-                    btnStar.setImageResource(android.R.drawable.star_on);
-                }else {
-                    btnStar.setImageResource(android.R.drawable.star_off);
-                }
-
-                mAdapter.getLink(pos).setFavorite(!temp);
-                linkViewModel.update(mAdapter.getLink(pos));
-            }
-        });
-
-
+        controller.OnClick();
         setData();
         return view;
     }

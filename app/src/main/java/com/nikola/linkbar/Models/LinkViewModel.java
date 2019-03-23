@@ -17,16 +17,25 @@ public class LinkViewModel extends AndroidViewModel {
     private linkRepository rep;
     private LiveData<List<Links>> allNotes;
     private LiveData<List<Links>> allFav;
+    private LiveData<List<Links>> allViewed;
 
     public LinkViewModel(Application application) {
         super(application);
-//        Log.d(TAG, "LinkViewModel: "+rep.getAllLinks());
+
         rep = new linkRepository(application);
         allNotes = rep.getAllLinks();
         allFav=rep.getAllFav();
+        allViewed= rep.getViewed();
     }
 
-    public LiveData<List<Links>> getAllFav(){return allFav;}
+    public LiveData<List<Links>> getAllViewed(){
+        return allViewed;
+    }
+
+    public LiveData<List<Links>> getAllFav(){
+        return allFav;
+    }
+
     public LiveData<List<Links>> getAllLinks(){
         return allNotes;
     }
@@ -40,7 +49,6 @@ public class LinkViewModel extends AndroidViewModel {
     }
 
     public void delete(Links link){
-        Log.d("Fragment", "delete: ");
         rep.delete(link);
     }
 

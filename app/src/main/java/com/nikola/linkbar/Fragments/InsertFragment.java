@@ -39,7 +39,7 @@ public class InsertFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick: CLicked"+TAG);
-                Links link = new Links(name,url,false);
+                Links link = new Links(name,url,false,0);
                 linkViewModel.insert(link);
 
             }
