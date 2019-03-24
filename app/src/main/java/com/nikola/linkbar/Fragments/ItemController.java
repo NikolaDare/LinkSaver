@@ -14,6 +14,11 @@ import com.nikola.linkbar.data.adapters.LinkAdapter;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.security.Timestamp;
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class ItemController  {
 
@@ -63,20 +68,12 @@ public class ItemController  {
 
                 query = adapter.getLink(position).getDesc();
 
-                adapter.getLink(position).setViewed(10);
-                linkViewModel.update(adapter.getLink(position));
-                for (int t = 0; t < adapter.getLinks().size(); t++) {
-                    if (adapter.getLink(t).getId() != adapter.getLink(position).getId() && adapter.getLink(t).getViewed() > 0) {
-                        int i = adapter.getLink(t).getViewed();
-                        if (adapter.getLinks().size()<10&&i==1){
+                Long tsLong = System.currentTimeMillis()/1000;
+                adapter.getLink(position).setViewed(Integer.valueOf(String.valueOf(tsLong)));
 
-                        }else {
-                            --i;
-                        }
-                        adapter.getLink(t).setViewed(i);
-                        linkViewModel.update(adapter.getLink(t));
-                    }
-                }
+                Log.d("TIME", "onRowClick: "+tsLong);
+                linkViewModel.update(adapter.getLink(position));
+
 
                 if (query.startsWith("http://") || query.startsWith("https://") || query.startsWith("www.")) {
                     if (query.startsWith("www.")) {
@@ -96,8 +93,8 @@ public class ItemController  {
                     uriUrl = Uri.parse(url);
                 }
 
-//                Intent intent = new Intent(Intent.ACTION_VIEW,uriUrl);
-//                act.startActivity(intent);
+                Intent intent = new Intent(Intent.ACTION_VIEW,uriUrl);
+                act.startActivity(intent);
             }
         });
     }

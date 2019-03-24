@@ -31,7 +31,7 @@ public interface LinkDao {
     @Query("Select * from list where favorite=1")
     LiveData<List<Links>> getAllFav();
 
-    @Query("Select * from list where viewed > 0 Order by viewed DESC")
+    @Query("Select * from list where viewed > 0 Order by viewed DESC limit 10")
     LiveData<List<Links>> getAllViewed();
 
 
